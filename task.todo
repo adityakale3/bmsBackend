@@ -1,0 +1,14 @@
+Index Elements:
+    NON Auth :
+        ✔ Login @done (9/9/2020, 8:51:24 PM)
+
+    Auth :
+        ☐ Fetch Basic Data
+        ☐ Fetch DTA Task
+        ☐ Fetch Projects
+        ☐ Fetch Project Tasks
+        ☐ Fetch Date wise DTA
+        ☐ Fetch Monthly DTA
+        ☐ POST DTA
+        ☐ Check Version
+        ☐ Check APi Endpoint
