@@ -3,12 +3,16 @@ Index Elements:
         ✔ Login @done (9/9/2020, 8:51:24 PM)
 
     Auth :
-        ☐ Fetch Basic Data
-        ☐ Fetch DTA Task
-        ☐ Fetch Projects
-        ☐ Fetch Project Tasks
-        ☐ Fetch Date wise DTA
-        ☐ Fetch Monthly DTA
+        ✔ Fetch Basic Data (Added in Login) @done (9/9/2020, 8:59:23 PM)
+        ✔ Fetch DTA Task @done (9/13/2020, 7:58:34 PM)
+        ✔ Fetch Projects ID's @done (9/13/2020, 8:18:08 PM)
+        ✔ Fetch Project Details by ID @done (9/13/2020, 8:18:10 PM)
+        ✔ Fetch All Project Tasks (Employee Code) @done (9/13/2020, 8:21:58 PM)
+        ✔ Fetch Project Tasks By ID @done (9/13/2020, 8:39:04 PM)
+        ✔ Fetch Months DTA @done (9/13/2020, 9:01:37 PM)
+        ✔ Fetch Monthly DTA @done (9/13/2020, 9:01:38 PM)
+        ✔ Fetch Date wise DTA @done (9/13/2020, 9:01:39 PM)
         ☐ POST DTA
+        ☐ POST submission
         ☐ Check Version
         ☐ Check APi Endpoint

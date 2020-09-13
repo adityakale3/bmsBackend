@@ -7,7 +7,7 @@ const jwt = require("jsonwebtoken");
 
 // Login User
 router.post(
-  "/login",
+  "/",
   [
     body("empcode", "Employee Code is Required")
       .trim()
@@ -66,6 +66,7 @@ router.post(
                 dept: dbData[0].dept,
                 subdept: dbData[0].subdept,
                 ro: dbData[0].ro,
+                designation: dbData[0].designation,
               },
               process.env.JWT_SECRET,
               { expiresIn: "24h" }

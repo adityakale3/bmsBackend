@@ -14,9 +14,15 @@ var verifyToken = async (req, res, next) => {
     const decrypt = await jwt.verify(token, process.env.JWT_SECRET);
     console.log("Dcrypt ", decrypt);
     req.user = {
-      name: decrypt.name,
-      userID: decrypt.userID,
+      empcode: decrypt.empcode,
+      name: decrypt.empname,
+      band: decrypt.grade,
+      dept: decrypt.dept,
+      subdept: decrypt.subdept,
+      ro: decrypt.ro,
+      designation: decrypt.designation,
     };
+
     next();
   } catch (err) {
     return res.status(500).json(err.toString());
