@@ -7,6 +7,9 @@ const verifyHeaders = require("./authCheck/checkHeaders");
 
 // Routes
 const login = require("./api/login");
+const fetchBasics = require("./api/auth/fetchBasics");
+const fetchDTA = require("./api/auth/fetchDTA");
+const postDTA = require("./api/auth/postDTA");
 
 // Config BodyParser
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
@@ -25,6 +28,15 @@ app.get("/", (req, res) => {
 
 // Post login genrate Token
 app.use("/api/login", verifyHeaders, login);
+
+// Post Fetch Basics
+app.use("/api/fetch/", verifyHeaders, verifyToken, fetchBasics);
+
+// Post Fetch DTA
+app.use("/api/fetch/", verifyHeaders, verifyToken, fetchDTA);
+
+// Post DTA Data
+app.use("/api/post/", verifyHeaders, verifyToken, postDTA);
 
 app.listen(process.env.PORT || 3000, () => {
   console.log("App Up and Running");
