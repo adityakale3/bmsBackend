@@ -40,7 +40,8 @@ router.post(
       const { empcode, password } = user;
 
       // Query DB to check user Exist
-      var getQuery = "SELECT * FROM `users` WHERE empcode = ?";
+      var getQuery =
+        "SELECT empcode,empname,grade,dept,subdept,ro,designation,plantcode,division FROM `users` WHERE empcode = ?";
       var query = mysql.format(getQuery, [empcode]);
       con.query(query, function (err, dbData) {
         if (err) {
@@ -67,6 +68,8 @@ router.post(
                 subdept: dbData[0].subdept,
                 ro: dbData[0].ro,
                 designation: dbData[0].designation,
+                plantcode: dbData[0].plantcode,
+                division: dbData[0].division,
               },
               process.env.JWT_SECRET,
               { expiresIn: "24h" }

@@ -155,4 +155,59 @@ router.post("/fetch_day_dta/:dayDate", (req, res) => {
   }
 });
 
+// Fetch Day TimeDuration
+router.post("/fetch_day_duration/:dayDate", (req, res) => {
+  // Get Data from post
+  var { empcode } = req.user;
+  // var { empcode, name, band, dept, subdept, ro, designation } = req.user;
+
+  // Get Summary Day
+  // Day Format : 2020-09-01
+  var dayDate = req.params.dayDate;
+
+  if (req.params.dayDate) {
+    // Query DB to get status
+    var getQuery = `SELECT SUM(timeduration) AS tt FROM dta WHERE empcode = ? AND tarikh = ? `;
+    var query = mysql.format(getQuery, [empcode, dayDate]);
+    con.query(query, function (err, dbData) {
+      //console.log(" Database Data : ", dbData);
+      if (dbData.length > 0) {
+        if (err) {
+          //
+          //  Response // error checking user in db
+          //
+          res.json({
+            err: true,
+            msg: "Connectivity Issue ERR - 502 ",
+          });
+        } else {
+          //
+          //  Response // Success , Sending all Data
+          //
+          res.json({
+            err: false,
+            msg: dbData[0].tt,
+          });
+        }
+      } else {
+        //
+        //  Response
+        //
+        res.json({
+          err: true,
+          msg: "No Data",
+        });
+      }
+    });
+  } else {
+    //
+    //  Response // No Projects
+    //
+    res.json({
+      err: true,
+      msg: "Invalid Date",
+    });
+  }
+});
+
 module.exports = router;

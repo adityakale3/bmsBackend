@@ -21,6 +21,8 @@ var verifyToken = async (req, res, next) => {
       subdept: decrypt.subdept,
       ro: decrypt.ro,
       designation: decrypt.designation,
+      plantcode: decrypt.plantcode,
+      division: decrypt.division,
     };
 
     next();
