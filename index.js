@@ -4,13 +4,15 @@ const cors = require("cors");
 require("dotenv").config();
 const verifyToken = require("./authCheck/checkAuth");
 const verifyHeaders = require("./authCheck/checkHeaders");
-
+var morgan = require('morgan'); 
 // Routes
 const login = require("./api/login");
 const fetchBasics = require("./api/auth/fetchBasics");
 const fetchDTA = require("./api/auth/fetchDTA");
 const postDTA = require("./api/auth/postDTA");
 
+// Middleware for loggin Dev dep
+app.use(morgan('dev'));
 // Config BodyParser
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 // Using body-parser

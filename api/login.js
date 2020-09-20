@@ -41,7 +41,7 @@ router.post(
 
       // Query DB to check user Exist
       var getQuery =
-        "SELECT empcode,empname,grade,dept,subdept,ro,designation,plantcode,division FROM `users` WHERE empcode = ?";
+        "SELECT empcode,empname,grade,dept,subdept,ro,designation,plantcode,division,isActive,password FROM `users` WHERE empcode = ?";
       var query = mysql.format(getQuery, [empcode]);
       con.query(query, function (err, dbData) {
         if (err) {
@@ -50,45 +50,47 @@ router.post(
           //
           res.json({
             err: true,
-            msg: "Connectivity Issue ERR - 200 ",
+            msg: "Connectivity Issue ERR - 200 " + err,
           });
         }
         // ON DB DATA
         // CHECK IF USER WITH EMAIL EXIST
         if (dbData.length > 0) {
           // Genrate Token JWT Token for 1hr
-
+          console.log(dbData[0]);
           if (dbData[0].isActive) {
-            var token = jwt.sign(
-              {
-                empcode: empcode,
-                name: dbData[0].empname,
-                band: dbData[0].grade,
-                dept: dbData[0].dept,
-                subdept: dbData[0].subdept,
-                ro: dbData[0].ro,
-                designation: dbData[0].designation,
-                plantcode: dbData[0].plantcode,
-                division: dbData[0].division,
-              },
-              process.env.JWT_SECRET,
-              { expiresIn: "24h" }
-            );
-            //
-            //  Response // Logged In successfully
-            //
-            res.json({ err: false, msg: token });
+            if (dbData[0].password == password) {
+              var token = jwt.sign(
+                {
+                  empcode: empcode,
+                  name: dbData[0].empname,
+                  band: dbData[0].grade,
+                  dept: dbData[0].dept,
+                  subdept: dbData[0].subdept,
+                  ro: dbData[0].ro,
+                  designation: dbData[0].designation,
+                  plantcode: dbData[0].plantcode,
+                  division: dbData[0].division,
+                },
+                process.env.JWT_SECRET,
+                { expiresIn: "24h" }
+              );
+              //
+              //  Response // Logged In successfully
+              //
+              res.json({ err: false, msg: token });
+            } else {
+              //
+              //  Response // Logged In successfully
+              //
+              res.json({ err: true, msg: "Invalid Credentials" });
+            }
           } else {
             //
             //  Response // InActive User
             //
             res.json({ err: true, msg: "User Deactivated" });
           }
-        } else {
-          //
-          //  Response // Logged In successfully
-          //
-          res.json({ err: true, msg: "Invalid Credentials" });
         }
       });
     }

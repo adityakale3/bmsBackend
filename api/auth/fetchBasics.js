@@ -10,7 +10,8 @@ router.post("/fetch_task", (req, res) => {
   // var { empcode, name, band, dept, subdept, ro, designation } = req.user;
 
   // Query DB to get status
-  var getQuery = "SELECT *  FROM `dtafav` WHERE empcode = ? OR empcode = ?";
+  var getQuery =
+    "SELECT *  FROM `dtafav` WHERE empcode = ? OR empcode = ? AND approval = '1'";
   var query = mysql.format(getQuery, [empcode, "common"]);
   con.query(query, function (err, dbData) {
     // console.log(" Database Data : ", dbData);
